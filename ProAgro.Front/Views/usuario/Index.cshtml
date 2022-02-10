@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProAgro.Front.Models.Usuario>
+
+@{
+    ViewBag.Title = "Usuario";
+}
+
+
+<div id="indexListado" class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <p>
+                        @Html.ActionLink("Nuevo Usuario", "Create")
+                    </p>
+
+                    @{
+
+                        if (TempData["MessageValidate"] != null)
+                        {
+                            <div id="Mensaje_validacion" class="alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>@TempData["MessageValidate"]</strong>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+                <div class="card-body ">
+                    @Html.Partial("Parcial_Usuario")
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/Content/js/Usuarios.js")
+
+}

@@ -1,0 +1,133 @@
+﻿
+
+@model ProAgro.Front.Models.RespuestaAPI_GeorreferenciaMAPS
+
+@{
+    ViewBag.Title = "Georreferencia";
+}
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <p>
+                        @Html.ActionLink("Regresar", "Index")
+                    </p>
+
+
+                    @{
+                        if (ViewBag.ErrorMessage != "")
+                        {
+                            <div id="Mensaje_error" class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>@ViewBag.ErrorMessage</strong>
+                            </div>
+
+                        }
+                    }
+
+
+                </div>
+                <div class="card-body ">
+                    @using (Html.BeginForm())
+                    {
+                        @*@Html.Hidden("EstadoSelected")
+                            @Html.Hidden("UsuarioSelected")*@
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>Usuario: </h4>
+                            <span>@Html.Raw(Model.NombredelUsuario)</span>
+
+                            <hr />
+                            <h4>Estado: </h4>
+                            <span>@Html.Raw(Model.NombredelEstado)</span>
+                            <hr />
+
+
+
+                            <div class="form-group">
+                                @Html.Label("Georreferencias", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+
+                                    @Html.DropDownList("idGeorreferencias", new SelectList(Model.ListaGeorreferencias, "idGeorreferencia", "LatitudLongitud"), htmlAttributes: new { @class = "form -control", @style = "display: inline" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+                <div id="frameMapa">
+
+                    @*<iframe id="prueba" width="600"
+                                height="470"
+                                frameborder="0"
+                                scrolling="no"
+                                marginheight="0"
+                                marginwidth="0"
+                                src="https://maps.google.com/maps?q=25.506789,-102.2433589&hl=es;z=14&amp;output=embed"></iframe>
+                        <br />
+                        <small>
+
+                            <a href="https://maps.google.com/maps?q=25.506789,-102.2433589&hl=es;z=14&amp;output=embed"
+                               style="color:#0000FF;text-align:left"
+                               target="_blank">
+                                See map bigger
+                            </a>
+                        </small>*@
+                </div>
+
+
+                @*<div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        console.log('abcd');
+    }); // fin de document ready
+</script>
+}
+
+@*@section scripts {
+
+    @Scripts.Render("~/Content/js/Usuarios.js")
+
+        }*@
+
+@*@section scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/Content/js/Usuarios.js")
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#btnEditIndividualCode').on("click", function () {
+                    console.log('abcd');
+                });
+
+                $('#idGeorreferencias').change(function () {
+                    console.log('abc');
+                });
+
+                console.log("entro");
+                console.log('entro2');
+            }); // fin de document ready
+        </script>
+    }*@
+
+

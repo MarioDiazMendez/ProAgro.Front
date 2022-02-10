@@ -1,0 +1,103 @@
+﻿@using ProAgro.Front.Models
+
+@model CreateGeorrefenciaViewModels
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <p>
+                        @Html.ActionLink("Regresar", "Index")
+                    </p>
+
+
+                    @{
+                        if (ViewBag.ErrorMessage != "")
+                        {
+                            <div id="Mensaje_error" class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>@ViewBag.ErrorMessage</strong>
+                            </div>
+
+                        }
+                    }
+
+
+                </div>
+                <div class="card-body ">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.Hidden("EstadoSelected")
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>Georreferencia</h4>
+                            <hr />
+
+
+                            <div class="form-group">
+                                @Html.Label("Estado", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("idEstado", new SelectList(Model.ListaEstados, "idEstado", "NombreEstado"), htmlAttributes: new { @class = "form-control", @style = "display: inline" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Georreferencia.Latitud, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Georreferencia.Latitud, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Georreferencia.Latitud, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Georreferencia.Longitud, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Georreferencia.Longitud, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Georreferencia.Longitud, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Crear Georreferencia" class="btn btn-default" id="btnEditIndividualCode" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+                @*<div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#btnEditIndividualCode").click(function () {
+            $("#EstadoSelected").val($('select[name="idEstado"] option:selected').text());
+        });
+    }); // fin de document ready
+</script>
+}
+
+

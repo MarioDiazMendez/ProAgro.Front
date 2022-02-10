@@ -1,0 +1,89 @@
+﻿@model ProAgro.Front.Models.Estado
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header ">
+                    <p>
+                        @Html.ActionLink("Regresar", "Index")
+                    </p>
+
+
+                    @{
+                        if (ViewBag.ErrorMessage != "")
+                        {
+                            <div id="Mensaje_error" class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                <strong>@ViewBag.ErrorMessage</strong>
+                            </div>
+
+                        }
+                    }
+
+
+                </div>
+                <div class="card-body ">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.HiddenFor(model => model.idEstado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.idEstado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NombreEstado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NombreEstado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NombreEstado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Abreviatura, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Abreviatura, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Abreviatura, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Guardar" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+                @*<div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
